@@ -1,7 +1,0 @@
-.env
-*.log
-vendor/
-.bundle/
-Gemfile.lock
-.DS_Store
-Thumbs.db
