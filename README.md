@@ -1,56 +1,126 @@
 # Discord Handler Ruby
 
-A modern, feature-rich Discord bot handler built with Ruby and discordrb, featuring both slash commands and prefix commands with a robust modular architecture.
+A modern, feature-rich Discord bot handler built with **discordrb**, featuring both slash commands and prefix commands with a robust modular architecture designed for scalability and maintainability.
 
-## Features
+## 🚀 Features
 
-- Slash commands and prefix commands
-- MongoDB integration with mongo gem
-- Modular architecture (commands, events, handlers)
-- Anti-crash system with error reporting
-- Cooldown system
-- Unicode emoji exports
-- Webhook logging
+- **Dual Command System**: Support for both slash commands and prefix commands
+- **Modular Architecture**: Clean separation of concerns with dedicated handlers
+- **Anti-Crash System**: Comprehensive error handling and monitoring
+- **Event-Driven**: Fully event-driven architecture
+- **Webhook Logging**: Real-time logging for errors and guild events
+- **MongoDB Integration**: Persistent data storage with mongo gem
+- **Cooldown System**: Per-command cooldown management
+- **Environment Configuration**: Secure configuration with dotenv
 
-## Prerequisites
-
-- Ruby 3.0+
-
-## Setup
-
-1. Clone the repository
-2. Copy `.env.example` to `.env` and fill in your bot token and other configuration
-3. Install dependencies:
-```bash
-bundle install
-```
-4. Run the bot:
-```bash
-ruby src/main.rb
-```
-
-## Project Structure
+## 📁 Project Structure
 
 ```
-src/
-├── main.rb                    # Entry point
-├── config/config.rb           # Configuration loader
-├── commands/slash/ping.rb     # Slash ping command
-├── commands/prefix/ping.rb    # Prefix ping command
-├── core/emojis.rb             # Unicode emoji exports
-├── core/command_utils.rb      # Cooldown utilities
-├── core/webhook_util.rb       # Webhook utility
-├── database/mongo.rb          # MongoDB connection
-├── events/ready.rb            # Ready event
-├── events/guild_create.rb     # Guild join event
-├── events/guild_delete.rb     # Guild leave event
-├── events/interaction_create.rb # Slash command handler
-├── events/message_create.rb   # Prefix command handler
-├── handlers/anti_crash.rb     # Error handling
-├── handlers/logger.rb         # Startup logger
-└── models/user_model.rb       # User data model
+Discord-Handler-Rb/
+├── Gemfile                       # Ruby gem dependencies
+├── src/                          # Source code
+│   ├── main.rb                   # Main bot entry point
+│   ├── config/Config.rb          # Bot configuration from .env
+│   ├── Core/                     # Core utilities
+│   │   ├── CommandUtils.rb       # Cooldown and utilities
+│   │   ├── Emojis.rb             # Centralized emoji definitions
+│   │   └── WebhookUtil.rb        # Webhook utility
+│   ├── Database/
+│   │   └── Mongo.rb              # MongoDB connection setup
+│   ├── Events/                   # Discord event handlers
+│   │   ├── GuildCreate.rb        # Handler when bot joins a server
+│   │   ├── GuildDelete.rb        # Handler when bot leaves a server
+│   │   ├── InteractionCreate.rb  # Handles slash command interactions
+│   │   ├── MessageCreate.rb      # Handles prefix commands
+│   │   └── Ready.rb              # Bot ready event
+│   ├── Handlers/                 # Handlers for modularity
+│   │   ├── AntiCrash.rb          # Crash prevention and error handling
+│   │   └── Logger.rb             # Logger for bot activity
+│   ├── Models/
+│   │   └── UserModel.rb          # User data model
+│   └── Commands/
+│       ├── Prefix/               # Prefix commands
+│       │   └── ping.rb           # Example prefix ping command
+│       └── Slash/                # Slash commands
+│           └── ping.rb           # Example slash ping command
 ```
 
-## License
+## 🔧 Installation
 
-MIT License - see [LICENSE](LICENSE) for details.
+1. **Clone the repository**
+
+   ```bash
+   git clone https://github.com/RealMtrx/Discord-Handler-Rb.git
+   cd Discord-Handler-Rb
+   ```
+
+2. **Install dependencies**
+
+   ```bash
+   bundle install
+   ```
+
+3. **Environment Setup**
+
+   Copy `.env.example` to `.env` and fill in your values:
+
+   ```env
+   TOKEN=your_bot_token_here
+   PREFIX=!
+   BOT_NAME=Discord Handler
+   MONGO_URI=mongodb://localhost:27017/discord-handler
+   ERROR_WEBHOOK=https://discord.com/api/webhooks/your_webhook
+   GUILD_LOG_WEBHOOK=https://discord.com/api/webhooks/your_webhook
+   ```
+
+4. **Run the bot**
+
+   ```bash
+   ruby src/main.rb
+   ```
+
+## 📋 Dependencies
+
+- **discordrb**: ~> 3.5 - Discord API wrapper
+- **mongo**: ~> 2.19 - MongoDB driver
+- **dotenv**: ~> 3.1 - Environment variable management
+- **net-http**: ~> 0.4 - HTTP client for webhooks
+
+## 📝 Command Development
+
+### Creating Slash Commands
+
+Create a new file in `src/Commands/Slash/[name].rb`:
+
+```ruby
+module SlashCommands
+  module Ping
+    NAME = 'ping'
+    DESCRIPTION = 'Replies with Pong!'
+
+    def self.call(event)
+      event.respond(content: 'Pong! 🏓')
+    end
+  end
+end
+```
+
+### Creating Prefix Commands
+
+Create a new file in `src/Commands/Prefix/[name].rb`:
+
+```ruby
+module PrefixCommands
+  module Ping
+    NAME = 'ping'
+
+    def self.call(event)
+      event.respond('Pong! 🏓')
+    end
+  end
+end
+```
+
+---
+
+**Discord Handler** - A modern, scalable Discord bot framework built with Ruby.
