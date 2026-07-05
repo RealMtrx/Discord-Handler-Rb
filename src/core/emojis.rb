@@ -1,0 +1,15 @@
+module Emojis
+  SUCCESS = "\u2705"
+  ERROR   = "\u274C"
+  WARNING = "\u26A0\uFE0F"
+  INFO    = "\u2139\uFE0F"
+  PING    = "\uD83C\uDFD3"
+  LOCK    = "\uD83D\uDD12"
+  UNLOCK  = "\uD83D\uDD13"
+  GEAR    = "\u2699\uFE0F"
+  ROBOT   = "\uD83E\uDD16"
+  WAVE    = "\uD83D\uDC4B"
+  FIRE    = "\uD83D\uDD25"
+  STAR    = "\u2B50"
+  HEART   = "\u2764\uFE0F"
+end
